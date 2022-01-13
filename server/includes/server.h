@@ -9,5 +9,7 @@
 
 # include <stdio.h> // A SUPPRIMER 
 
+void receive_char(int sig, siginfo_t *siginfo, void *context);
+
 
 #endif
