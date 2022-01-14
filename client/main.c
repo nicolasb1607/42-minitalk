@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:40:11 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/14 14:40:43 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:07:09 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,22 @@
 
 int received = 0;
 
-void handler()
+void handler1()
 {
-	write(1, "received\n", 9);
+	return ;
+}
+
+void handler2()
+{
+	ft_putstr("Message send\n");
 }
 
 int main(int ac, char **av)
 {
 	pid_t pid;
 	
-	signal(SIGUSR1, handler);
+	signal(SIGUSR1, handler1);
+	signal(SIGUSR2, handler2);
 	
 	if (ac == 3)
 	{
