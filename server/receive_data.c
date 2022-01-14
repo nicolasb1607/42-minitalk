@@ -4,9 +4,7 @@ void receive_char(int sig, siginfo_t *siginfo, void *context)
 {
     static char current = 0;
     static int i;
-    //static char *str;
     (void) context;
-    (void) siginfo;
     
     if (sig == SIGUSR1 && i < 8)
     {
@@ -20,14 +18,12 @@ void receive_char(int sig, siginfo_t *siginfo, void *context)
     }
     //printf("value of i = %d\n", i);
     if (i == 8)
-    {
-        if (current == '\0')
-        {
+    {   
+        if (current == 0)
             ft_putchar('\n');
-        }
         else
             ft_putchar(current);
         i = 0;
-        current = '\0';
     }
 }
+
