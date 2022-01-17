@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:37:05 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/17 15:27:35 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:50:34 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ void receive_char(int sig, siginfo_t *siginfo, void *context)
 int main()
 {
 	struct sigaction sa;
+
 	char *tmp;
-	
+
 	g_data.char_received = 0;
 	g_data.bits = 0;
 	g_data.msg = malloc(sizeof(char) * 1);
@@ -55,25 +56,23 @@ int main()
 	{
 		if (g_data.sig_received == 1)
 		{
-			if (g_data.bits == 8 && g_data.char_received == 0)
-			{
-				ft_putstr(g_data.msg);
-				ft_putchar('\n');
-				free(g_data.msg);
-				g_data.char_received = 0;
-				g_data.bits = 0;
-				kill(g_data.pid_client, SIGUSR2);
-			}
 			if (g_data.bits == 8)
 			{
-				g_data.msg = ft_strjoin(g_data.msg, g_data.char_received);
+				tmp = ft_strjoin(g_data.msg, g_data.char_received);
+				g_data.msg = tmp;
+				if (g_data.char_received == 0)
+				{
+					ft_putstr(g_data.msg);
+					ft_putchar('\n');
+					free(g_data.msg);
+					kill(g_data.pid_client, SIGUSR2);
+				}
 				g_data.char_received = 0;
 				g_data.bits = 0;
 			}
 			g_data.sig_received = 0;
 			kill(g_data.pid_client, SIGUSR1);
 		}
-	
 	}
 	return (0);
 }
