@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:37:05 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/17 14:05:40 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:27:35 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ void receive_char(int sig, siginfo_t *siginfo, void *context)
 int main()
 {
 	struct sigaction sa;
+	char *tmp;
+	
 	g_data.char_received = 0;
 	g_data.bits = 0;
+	g_data.msg = malloc(sizeof(char) * 1);
+	g_data.msg[0] = '\0';
 
 	sa.sa_sigaction = receive_char;
 	sa.sa_flags = SA_SIGINFO;
@@ -53,14 +57,16 @@ int main()
 		{
 			if (g_data.bits == 8 && g_data.char_received == 0)
 			{
+				ft_putstr(g_data.msg);
 				ft_putchar('\n');
+				free(g_data.msg);
 				g_data.char_received = 0;
 				g_data.bits = 0;
 				kill(g_data.pid_client, SIGUSR2);
 			}
-			else if (g_data.bits == 8)
+			if (g_data.bits == 8)
 			{
-				ft_putchar(g_data.char_received);
+				g_data.msg = ft_strjoin(g_data.msg, g_data.char_received);
 				g_data.char_received = 0;
 				g_data.bits = 0;
 			}
