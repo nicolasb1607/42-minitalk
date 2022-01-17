@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:40:11 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/14 17:07:09 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:02:54 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,48 @@ void handler1()
 void handler2()
 {
 	ft_putstr("Message send\n");
+}
+
+
+void end_msg(pid_t pid)
+{
+	int i;
+
+	while (i < 8)
+	{
+		kill(pid, SIGUSR2);
+		pause();
+		i++;
+	}
+}
+
+void send_str(char *str, pid_t pid)
+{
+	int i;
+	int j;
+	int mask;
+	int sig;
+
+	i = 0;
+	while (str[i])
+	{
+		mask = (1 << 7);
+		j = 0;
+		while (j < 8)
+		{
+			
+			sig = str[i] & mask;
+			if (sig)
+				kill(pid, SIGUSR1);
+			else if (sig == 0)
+				kill(pid, SIGUSR2);
+			pause();
+			mask = (mask >> 1);
+			j++;
+		}
+		i++;
+	}
+	end_msg(pid);
 }
 
 int main(int ac, char **av)
