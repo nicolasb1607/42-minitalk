@@ -9,6 +9,8 @@
 
 # include <stdio.h> // A SUPPRIMER 
 
+
+
 void    send_str(char *str, pid_t pid);
 
 #endif

@@ -38,12 +38,13 @@ int main()
 {
 	struct sigaction sa;
 
-	char *tmp;
+	
 
 	g_data.char_received = 0;
 	g_data.bits = 0;
-	g_data.msg = malloc(sizeof(char) * 1);
-	g_data.msg[0] = '\0';
+	char *str = malloc(sizeof(char) * 1);
+	str[0] = '\0';
+
 
 	sa.sa_sigaction = receive_char;
 	sa.sa_flags = SA_SIGINFO;
@@ -52,20 +53,24 @@ int main()
 	sigaction(SIGUSR2, &sa, NULL);
 
 	print_pid();
+	
 	while (1)
 	{
 		if (g_data.sig_received == 1)
 		{
 			if (g_data.bits == 8)
 			{
-				tmp = ft_strjoin(g_data.msg, g_data.char_received);
-				g_data.msg = tmp;
+				//printf("passage: %i str : %s\n", i, str);
+				str = ft_strjoin(str, g_data.char_received);
 				if (g_data.char_received == 0)
 				{
-					ft_putstr(g_data.msg);
+					ft_putstr(str);
 					ft_putchar('\n');
-					free(g_data.msg);
+					free(str);
+					
 					kill(g_data.pid_client, SIGUSR2);
+					str = malloc(sizeof(char) * 1);
+					str[0] = '\0';
 				}
 				g_data.char_received = 0;
 				g_data.bits = 0;

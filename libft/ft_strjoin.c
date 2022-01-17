@@ -30,7 +30,7 @@ char	*ft_strjoin(char *s1, char c)
 	i = -1;
 	j = -1;
 	if (!s1)
-		calloc(1, 1);
+		s1 = calloc(1, 1);
 	catlen = ft_strlen(s1) + 1;
 	strcat = malloc((catlen + 1) * sizeof(char));
 	if (!strcat)
@@ -39,5 +39,6 @@ char	*ft_strjoin(char *s1, char c)
 		strcat[++j] = s1[i];
 	strcat[++j] = c;
 	strcat[++j] = '\0';
+	//free(s1);
 	return (strcat);
 }

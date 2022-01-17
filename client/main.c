@@ -12,10 +12,11 @@
 
 #include "./includes/client.h"
 
-int received = 0;
+int received;
 
 void handler1()
 {
+	received = 1;
 	return ;
 }
 
@@ -28,11 +29,14 @@ void handler2()
 void end_msg(pid_t pid)
 {
 	int i;
-
+	
+	i = 0;
 	while (i < 8)
 	{
 		kill(pid, SIGUSR2);
-		pause();
+		while(received == 0)
+			;
+		received = 0;
 		i++;
 	}
 }
@@ -57,7 +61,9 @@ void send_str(char *str, pid_t pid)
 				kill(pid, SIGUSR1);
 			else if (sig == 0)
 				kill(pid, SIGUSR2);
-			pause();
+			while(received == 0)
+				;
+			received = 0;
 			mask = (mask >> 1);
 			j++;
 		}
@@ -70,6 +76,8 @@ int main(int ac, char **av)
 {
 	pid_t pid;
 	
+	received = 0;
+
 	signal(SIGUSR1, handler1);
 	signal(SIGUSR2, handler2);
 	
