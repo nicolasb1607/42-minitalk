@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   client.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 12:24:20 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/17 17:42:53 by nburat-d         ###   ########.fr       */
+/*   Created: 2022/01/18 13:10:51 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/01/18 13:10:52 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef CLIENT_H
+# define CLIENT_H
 
-void	ft_putstr(unsigned char *str)
+# include <unistd.h>
+# include <stdlib.h>
+# include "../../libft/libft.h"
+# include <signal.h>
+# include <sys/types.h>
+
+typedef struct s_data
 {
-	int	i;
+	int		char_to_send;
+	int		bit_to_send;
+	int		kill_ret;
+	int		received;
+	int		mask;
+	int		sig;
+	pid_t	pid_server;
+}	t_data;
 
-	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-}
+void	handler2(void);
+
+#endif

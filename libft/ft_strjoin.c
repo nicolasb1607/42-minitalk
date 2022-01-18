@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:38:47 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/17 15:50:24 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:32:34 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ char	*ft_strjoin(char *s1, char c)
 		strcat[++j] = s1[i];
 	strcat[++j] = c;
 	strcat[++j] = '\0';
-	//free(s1);
+	free(s1);
 	return (strcat);
 }

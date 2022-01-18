@@ -6,27 +6,26 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:37:05 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/17 15:50:34 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 13:13:09 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/server.h"
 
-t_data g_data;
+t_data	g_data;
 
-void print_pid()
+void	print_pid(void)
 {
-	pid_t pid;
+	pid_t	pid;
 
 	pid = getpid();
-	printf("PID : %d\n", pid);
+	ft_putnbr(pid);
 }
 
-void receive_char(int sig, siginfo_t *siginfo, void *context)
+void	receive_char(int sig, siginfo_t *siginfo, void *context)
 {
 	g_data.pid_client = siginfo->si_pid;
-	(void)context;
-
+	(void) context;
 	if (sig == SIGUSR1 && g_data.bits < 8)
 		g_data.char_received |= (1 << (7 - g_data.bits++));
 	if (sig == SIGUSR2 && g_data.bits < 8)
@@ -34,50 +33,45 @@ void receive_char(int sig, siginfo_t *siginfo, void *context)
 	g_data.sig_received = 1;
 }
 
-int main()
+void	print_msg(void)
 {
-	struct sigaction sa;
+	ft_putstr(g_data.msg);
+	ft_putchar('\n');
+	free(g_data.msg);
+	kill(g_data.pid_client, SIGUSR2);
+	g_data.msg = malloc(sizeof(char) * 1);
+	g_data.msg [0] = '\0';
+}
 
-	
+void	append_msg(void)
+{
+	if (g_data.bits == 8)
+	{
+		g_data.msg = ft_strjoin(g_data.msg, g_data.char_received);
+		if (g_data.char_received == 0)
+			print_msg();
+		g_data.char_received = 0;
+		g_data.bits = 0;
+	}
+	g_data.sig_received = 0;
+	kill(g_data.pid_client, SIGUSR1);
+}
+
+int	main(void)
+{
+	struct sigaction	sa;
 
 	g_data.char_received = 0;
 	g_data.bits = 0;
-	char *str = malloc(sizeof(char) * 1);
-	str[0] = '\0';
-
-
 	sa.sa_sigaction = receive_char;
 	sa.sa_flags = SA_SIGINFO;
-
+	g_data.msg = malloc(sizeof(char) * 1);
+	g_data.msg [0] = '\0';
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-
 	print_pid();
-	
 	while (1)
-	{
 		if (g_data.sig_received == 1)
-		{
-			if (g_data.bits == 8)
-			{
-				//printf("passage: %i str : %s\n", i, str);
-				str = ft_strjoin(str, g_data.char_received);
-				if (g_data.char_received == 0)
-				{
-					ft_putstr(str);
-					ft_putchar('\n');
-					free(str);
-					
-					kill(g_data.pid_client, SIGUSR2);
-					str = malloc(sizeof(char) * 1);
-					str[0] = '\0';
-				}
-				g_data.char_received = 0;
-				g_data.bits = 0;
-			}
-			g_data.sig_received = 0;
-			kill(g_data.pid_client, SIGUSR1);
-		}
-	}
+			append_msg();
 	return (0);
 }

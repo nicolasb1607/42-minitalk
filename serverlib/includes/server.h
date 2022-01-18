@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 12:24:20 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/17 17:42:53 by nburat-d         ###   ########.fr       */
+/*   Created: 2022/01/18 13:14:42 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/01/18 13:15:34 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SERVER_H
+# define SERVER_H
 
-void	ft_putstr(unsigned char *str)
+# include <unistd.h>
+# include <stdlib.h>
+# include "../../libft/libft.h"
+# include <signal.h>
+# include <sys/types.h>
+
+# include <stdio.h> // A SUPPRIMER 
+
+typedef struct s_data
 {
-	int	i;
+	pid_t	pid_client;
+	int		bits;
+	char	char_received;
+	char	*msg;
+	int		sig_received;
+}	t_data;
 
-	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-}
+#endif

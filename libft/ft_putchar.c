@@ -6,13 +6,13 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:31:07 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/11 12:31:28 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:43:30 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar(char c)
+void	ft_putchar(unsigned char c)
 {
 	write(1, &c, 1);
 }
