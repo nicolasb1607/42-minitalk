@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:40:11 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/18 13:09:56 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:17:37 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 t_data	g_data;
 
-void	handler1(void)
+void	handler1(int sig)
 {
+	(void) sig;
 	g_data.received = 1;
 	return ;
 }

@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/18 16:22:42 by nburat-d          #+#    #+#              #
+#    Updated: 2022/01/18 16:22:43 by nburat-d         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 EXEC = libft.a
@@ -51,22 +63,30 @@ SRCS = ./ft_atoi.c \
 INCLUDES = ./
 OBJS_SRCS = ${SRCS:.c=.o}
 
+BLUE=\033[34m
+YEL=\033[33m
+
 
 all : $(EXEC)
+	@echo "$(BLUE)Compilation Libft DONE\n"
 
 .o : .c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
  
 
 $(EXEC) : $(OBJS_SRCS)
-		ar rcs $(EXEC) $(OBJS_SRCS)
+	ar rcs $(EXEC) $(OBJS_SRCS)
 
 clean :
 	rm -f $(OBJS_SRCS)
+	@echo "$(YEL)Libft clean DONE\n"
 
 fclean : clean
 	rm -f $(EXEC)
+	@echo "$(YEL)Libft fclean DONE\n"
 
 re : fclean all
 
 .PHONY : clean fclean re
+
+.SILENT :

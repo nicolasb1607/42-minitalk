@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:37:05 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/18 13:13:09 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:49:11 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	print_pid(void)
 
 	pid = getpid();
 	ft_putnbr(pid);
+	ft_putchar('\n');
 }
 
 void	receive_char(int sig, siginfo_t *siginfo, void *context)

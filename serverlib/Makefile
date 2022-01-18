@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/18 16:22:39 by nburat-d          #+#    #+#              #
+#    Updated: 2022/01/18 16:22:40 by nburat-d         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 EXEC = server
@@ -10,21 +22,31 @@ INCLUDES = ./includes/
 
 OBJS = ${SRCS:.c=.o}
 
-all : EXEC
+BLUE=\033[34m
+YEL=\033[33m
 
-EXEC : OBJS
+
+all : $(EXEC)
+	@echo "$(BLUE)Compilation server DONE\n"
+
+$(EXEC) : $(OBJS)
 	$(CC) $(CFLAGS) -L $(PATH_TO_LIB) $^ -I $(INCLUDES) -lft -o $(EXEC)
 
 .o : .c
-	make -C $(PATH_TO_LIB)
-	$(CC) $(CFLAGS) -c -L $(PATH_TO_LIB) $< -o $@ -I $(INCLUDES) -lft
+	@$(CC) $(CFLAGS) -c -L $(PATH_TO_LIB) $^ -o $@ -I $(INCLUDES) -lft
 
 clean :
 	rm -rf $(OBJS)
+	@echo "$(YEL)Server clean DONE\n"
 
-fclean :
+fclean : clean
 	rm -rf $(EXEC)
+	@echo "$(YEL)Server fclean DONE\n"
+re : fclean all
 
+.PHONY : all clean fclean
+
+.SILENT : 
 
 
 

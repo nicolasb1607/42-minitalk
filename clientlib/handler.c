@@ -6,13 +6,14 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 13:08:30 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/18 13:10:20 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:17:25 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "client.h"
+#include "./includes/client.h"
 
-void	handler2(void)
+void	handler2(int sig)
 {
+	(void) sig;
 	ft_putstr("Message send\n");
 }

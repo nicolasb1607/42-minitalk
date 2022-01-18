@@ -6,13 +6,13 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:24:20 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/17 17:42:53 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:18:36 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(unsigned char *str)
+void	ft_putstr(char *str)
 {
 	int	i;
 

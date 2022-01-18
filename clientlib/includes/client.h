@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 13:10:51 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/18 13:10:52 by nburat-d         ###   ########.fr       */
+/*   Created: 2022/01/18 16:23:33 by nburat-d          #+#    #+#             */
+/*   Updated: 2022/01/18 16:23:37 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ typedef struct s_data
 	pid_t	pid_server;
 }	t_data;
 
-void	handler2(void);
+void	handler2(int sig);
 
 #endif
