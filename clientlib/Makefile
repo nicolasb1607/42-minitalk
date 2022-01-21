@@ -6,7 +6,7 @@
 #    By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/18 16:22:47 by nburat-d          #+#    #+#              #
-#    Updated: 2022/01/18 16:22:48 by nburat-d         ###   ########.fr        #
+#    Updated: 2022/01/21 10:18:43 by nburat-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ BLUE=\033[34m
 YEL=\033[33m
 
 all : $(EXEC)
+	mv $< ../
 	@echo "$(BLUE)Compilation client DONE\n"
 
 $(EXEC) : $(OBJS)
@@ -39,7 +40,7 @@ clean :
 	@echo "$(YEL)Client clean DONE\n"
 
 fclean : clean
-	rm -rf $(EXEC)
+	rm -rf ../$(EXEC)
 	@echo "$(YEL)Client fclean DONE\n"
 re : fclean all
 

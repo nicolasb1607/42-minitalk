@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:40:11 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/18 15:17:37 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/21 11:42:19 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	send_bit(char *str)
 	if (g_data.kill_ret == -1)
 	{
 		ft_putstr("Error couldn't find the server\n");
-		return ;
+		exit (1) ;
 	}
 	while (g_data.received == 0)
 		;

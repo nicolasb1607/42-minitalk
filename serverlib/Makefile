@@ -1,4 +1,4 @@
-# **************************************************************************** #
+#**************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,7 +6,7 @@
 #    By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/18 16:22:39 by nburat-d          #+#    #+#              #
-#    Updated: 2022/01/18 16:22:40 by nburat-d         ###   ########.fr        #
+#    Updated: 2022/01/21 10:22:11 by nburat-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ YEL=\033[33m
 
 
 all : $(EXEC)
+	mv $< ../
 	@echo "$(BLUE)Compilation server DONE\n"
 
 $(EXEC) : $(OBJS)
@@ -40,7 +41,7 @@ clean :
 	@echo "$(YEL)Server clean DONE\n"
 
 fclean : clean
-	rm -rf $(EXEC)
+	rm -rf ../$(EXEC)
 	@echo "$(YEL)Server fclean DONE\n"
 re : fclean all
 
