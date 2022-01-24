@@ -6,7 +6,7 @@
 /*   By: nburat-d <nburat-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 12:40:11 by nburat-d          #+#    #+#             */
-/*   Updated: 2022/01/21 11:42:19 by nburat-d         ###   ########.fr       */
+/*   Updated: 2022/01/24 14:31:53 by nburat-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ int	main(int ac, char **av)
 	if (ac == 3)
 	{
 		g_data.pid_server = ft_atoi(av[1]);
+		if (g_data.pid_server <= 0)
+		{
+			ft_putstr("Error pid not valid\n");
+			exit(1);
+		}
 		send_str(av[2], g_data.pid_server);
 	}
 	return (0);
